@@ -1,0 +1,36 @@
+name: Refresh Weather Dashboard
+
+on:
+  schedule:
+    # Runs daily at 14:00 UTC = 8am MDT / 7am MST (Mountain Time)
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+    # Also allows manual trigger from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60   # generous timeout for first-run normals fetch
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run refresh script
+        run: python refresh_web.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add data.json normals.json
+          git diff --staged --quiet || git commit -m "Auto-refresh: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
