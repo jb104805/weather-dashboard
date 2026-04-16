@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60   # generous timeout for first-run normals fetch
     env:
-      FORCE_JAVASCRIPT_ACTIONS-TO-NODE24: true
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       
     steps:
       - name: Check out repository
