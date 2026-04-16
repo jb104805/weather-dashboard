@@ -14,7 +14,9 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 60   # generous timeout for first-run normals fetch
-
+    env:
+      FORCE_JAVASCRIPT_ACTIONS-TO-NODE24: true
+      
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
