@@ -171,7 +171,7 @@ def fetch_solar_day(lat, lon):
         f"https://api.open-meteo.com/v1/forecast"
         f"?latitude={lat:.4f}&longitude={lon:.4f}"
         f"&hourly=shortwave_radiation,cloudcover"
-        f"&past_days=7&forecast_days=11&timezone=auto"
+        f"&past_days=14&forecast_days=11&timezone=auto"
     )
     try:
         with urllib.request.urlopen(url, timeout=30) as r:
@@ -206,7 +206,7 @@ def fetch_wind_day(lat, lon):
         f"https://api.open-meteo.com/v1/forecast"
         f"?latitude={lat:.4f}&longitude={lon:.4f}"
         f"&hourly=windspeed_80m&windspeed_unit=mph"
-        f"&past_days=7&forecast_days=11&timezone=auto"
+        f"&past_days=14&forecast_days=11&timezone=auto"
     )
     try:
         with urllib.request.urlopen(url, timeout=30) as r:
