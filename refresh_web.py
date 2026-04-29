@@ -125,7 +125,7 @@ CITY_META = {
 # ══════════════════════════════════════════════════════════════
 def fetch_weather(lat, lon):
     today      = date.today()
-    past_start = today - timedelta(days=7)
+    past_start = today - timedelta(days=14)
     results    = {}
     arch_url = (
         f"https://archive-api.open-meteo.com/v1/archive"
@@ -496,7 +496,7 @@ def main():
         print("  All normals present — skipping fetch.")
 
     today     = date.today()
-    all_dates = [today - timedelta(days=7) + timedelta(days=i) for i in range(18)]
+    all_dates = [today - timedelta(days=14) + timedelta(days=i) for i in range(25)]
 
     print(f"\n  Fetching temperature data ({len(CITIES)} cities)...")
     city_weather = {}
