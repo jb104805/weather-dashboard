@@ -54,10 +54,12 @@ CITIES = [
 ]
 
 SOLAR_CITIES = [
-    ("Palm Springs", "CA",  33.8303, -116.5453),
-    ("Blythe",       "CA",  33.6103, -114.5961),
-    ("Fresno",       "CA",  36.7378, -119.7871),
-    ("Bakersfield",  "CA",  35.3733, -119.0187),
+    ("Palm Springs",   "CA",  33.8303, -116.5453),
+    ("Desert Center",  "CA",  33.7157, -115.4017),
+    ("El Centro",      "CA",  32.7920, -115.5630),
+    ("Blythe",         "CA",  33.6103, -114.5961),
+    ("Fresno",         "CA",  36.7378, -119.7871),
+    ("Bakersfield",    "CA",  35.3733, -119.0187),
 ]
 
 WIND_CITIES = [
