@@ -67,6 +67,124 @@ WIND_CITIES = [
     ("Tehachapi",  "CA",  35.1325, -118.4485),
 ]
 
+UAMPS_CITIES = [
+    ("Bountiful City",      "UT",  40.8894, -111.8808),
+    ("Brigham City",        "UT",  41.5100, -112.0158),
+    ("Hyrum City",          "UT",  41.6313, -111.8549),
+    ("Kaysville City",      "UT",  41.0352, -111.9388),
+    ("Lehi City",           "UT",  40.3916, -111.8508),
+    ("Logan City",          "UT",  41.7370, -111.8338),
+    ("Morgan City",         "UT",  41.0361, -111.6769),
+    ("Murray City",         "UT",  40.6669, -111.8879),
+    ("Payson City",         "UT",  40.0444, -111.7324),
+    ("Springville City",    "UT",  40.1699, -111.6113),
+    ("Heber Light & Power", "UT",  40.5069, -111.4133),
+    ("S. Utah Valley ESD",  "UT",  40.1149, -111.6549),
+    ("Weber Basin WCD",     "UT",  41.2230, -111.9740),
+    ("Ephraim City",        "UT",  39.3594, -111.5877),
+    ("Fairview City",       "UT",  39.6252, -111.4341),
+    ("Fillmore City",       "UT",  38.9691, -112.3235),
+    ("Helper City",         "UT",  39.6860, -110.8549),
+    ("Holden Town",         "UT",  39.0902, -112.2780),
+    ("Kanosh Town",         "UT",  38.7969, -112.4363),
+    ("Meadow Town",         "UT",  38.8994, -112.3988),
+    ("Monroe City",         "UT",  38.6327, -112.1174),
+    ("Mt. Pleasant City",   "UT",  39.5474, -111.4538),
+    ("Town of Oak City",    "UT",  39.3655, -112.3369),
+    ("Price City",          "UT",  39.5993, -110.8107),
+    ("Spring City",         "UT",  39.4821, -111.4949),
+    ("Central Valley WRF",  "UT",  40.6977, -112.0605),
+    ("Beaver City",         "UT",  38.2736, -112.6413),
+    ("Blanding City",       "UT",  37.6249, -109.4785),
+    ("City of Enterprise",  "UT",  37.5732, -113.7193),
+    ("Hurricane City",      "UT",  37.1753, -113.2897),
+    ("Town of Paragonah",   "UT",  37.8894, -112.7874),
+    ("Parowan City",        "UT",  37.8427, -112.8274),
+    ("Santa Clara",         "UT",  37.1316, -113.6538),
+    ("St. George",          "UT",  37.0965, -113.5684),
+    ("Washington City",     "UT",  37.1302, -113.5080),
+    ("Ticaboo UID",         "UT",  37.4949, -110.7430),
+    ("City of Fallon",      "NV",  39.4735, -118.7774),
+    ("Wells Rural EC",      "NV",  41.1135, -114.9630),
+    ("Gallup City",         "NM",  35.5281, -108.7426),
+    ("Los Alamos County",   "NM",  35.8800, -106.3031),
+    ("Navajo TUA",          "AZ",  36.1500, -109.5500),
+    ("Idaho Energy Auth.",  "ID",  43.4917, -112.0339),
+    ("Idaho Falls Power",   "ID",  43.4917, -112.0339),
+    ("Lost River EC",       "ID",  43.9135, -113.6125),
+    ("Salmon River EC",     "ID",  45.1769, -113.8958),
+    ("Lassen MUD",          "CA",  40.4152, -120.6529),
+    ("Plumas-Sierra REC",   "CA",  39.9350, -120.9470),
+    ("Truckee Donner PUD",  "CA",  39.3280, -120.1833),
+    ("Lower Valley Energy", "WY",  42.7252, -110.9305),
+]
+
+UAMPS_CITY_META = {
+    "Bountiful City":      {"geo": "Northern Utah", "load_rank": 1},
+    "Brigham City":        {"geo": "Northern Utah", "load_rank": 2},
+    "Hyrum City":          {"geo": "Northern Utah", "load_rank": 2},
+    "Kaysville City":      {"geo": "Northern Utah", "load_rank": 1},
+    "Lehi City":           {"geo": "Northern Utah", "load_rank": 1},
+    "Logan City":          {"geo": "Northern Utah", "load_rank": 1},
+    "Morgan City":         {"geo": "Northern Utah", "load_rank": 2},
+    "Murray City":         {"geo": "Northern Utah", "load_rank": 1},
+    "Payson City":         {"geo": "Northern Utah", "load_rank": 1},
+    "Springville City":    {"geo": "Northern Utah", "load_rank": 1},
+    "Heber Light & Power": {"geo": "Northern Utah", "load_rank": 1},
+    "S. Utah Valley ESD":  {"geo": "Northern Utah", "load_rank": 1},
+    "Weber Basin WCD":     {"geo": "Northern Utah", "load_rank": 1},
+    "Ephraim City":        {"geo": "Central Utah",  "load_rank": 2},
+    "Fairview City":       {"geo": "Central Utah",  "load_rank": 2},
+    "Fillmore City":       {"geo": "Central Utah",  "load_rank": 2},
+    "Helper City":         {"geo": "Central Utah",  "load_rank": 2},
+    "Holden Town":         {"geo": "Central Utah",  "load_rank": 3},
+    "Kanosh Town":         {"geo": "Central Utah",  "load_rank": 3},
+    "Meadow Town":         {"geo": "Central Utah",  "load_rank": 3},
+    "Monroe City":         {"geo": "Central Utah",  "load_rank": 3},
+    "Mt. Pleasant City":   {"geo": "Central Utah",  "load_rank": 2},
+    "Town of Oak City":    {"geo": "Central Utah",  "load_rank": 3},
+    "Price City":          {"geo": "Central Utah",  "load_rank": 2},
+    "Spring City":         {"geo": "Central Utah",  "load_rank": 3},
+    "Central Valley WRF":  {"geo": "Central Utah",  "load_rank": 2},
+    "Beaver City":         {"geo": "Southern Utah", "load_rank": 2},
+    "Blanding City":       {"geo": "Southern Utah", "load_rank": 3},
+    "City of Enterprise":  {"geo": "Southern Utah", "load_rank": 3},
+    "Hurricane City":      {"geo": "Southern Utah", "load_rank": 2},
+    "Town of Paragonah":   {"geo": "Southern Utah", "load_rank": 3},
+    "Parowan City":        {"geo": "Southern Utah", "load_rank": 2},
+    "Santa Clara":         {"geo": "Southern Utah", "load_rank": 2},
+    "St. George":          {"geo": "Southern Utah", "load_rank": 1},
+    "Washington City":     {"geo": "Southern Utah", "load_rank": 1},
+    "Ticaboo UID":         {"geo": "Southern Utah", "load_rank": 3},
+    "City of Fallon":      {"geo": "Nevada",        "load_rank": 2},
+    "Wells Rural EC":      {"geo": "Nevada",        "load_rank": 2},
+    "Gallup City":         {"geo": "New Mexico",    "load_rank": 1},
+    "Los Alamos County":   {"geo": "New Mexico",    "load_rank": 1},
+    "Navajo TUA":          {"geo": "Arizona",       "load_rank": 1},
+    "Idaho Energy Auth.":  {"geo": "Idaho",         "load_rank": 3},
+    "Idaho Falls Power":   {"geo": "Idaho",         "load_rank": 1},
+    "Lost River EC":       {"geo": "Idaho",         "load_rank": 2},
+    "Salmon River EC":     {"geo": "Idaho",         "load_rank": 2},
+    "Lassen MUD":          {"geo": "California",    "load_rank": 2},
+    "Plumas-Sierra REC":   {"geo": "California",    "load_rank": 2},
+    "Truckee Donner PUD":  {"geo": "California",    "load_rank": 1},
+    "Lower Valley Energy": {"geo": "Wyoming",       "load_rank": 2},
+}
+
+UAMPS_GEO_GROUP_ORDER = [
+    "Northern Utah", "Central Utah", "Southern Utah",
+    "Nevada", "New Mexico", "Arizona", "Idaho", "California", "Wyoming",
+]
+
+UAMPS_SOLAR_CITIES = [
+    ("Red Mesa Solar", "UT",  37.1160, -109.4037),
+    ("Steel Solar",    "UT",  41.8785, -112.1461),
+]
+
+UAMPS_WIND_CITIES = [
+    ("Horse Butte Wind", "ID",  43.3923, -111.7395),
+]
+
 # ══════════════════════════════════════════════════════════════
 # NOAA 30-YEAR NORMALS (1991-2020)
 # ══════════════════════════════════════════════════════════════
@@ -98,6 +216,8 @@ STATE_TZ = {
     "AZ": "America%2FPhoenix",
     "UT": "America%2FDenver",
     "ID": "America%2FBoise",
+    "NM": "America%2FDenver",
+    "WY": "America%2FDenver",
 }
 
 CITY_META = {
@@ -333,7 +453,7 @@ def fetch_wind_normals(lat, lon, tz, start_date, end_date, retries=3):
         f"https://archive-api.open-meteo.com/v1/archive"
         f"?latitude={lat:.4f}&longitude={lon:.4f}"
         f"&start_date={start_date}&end_date={end_date}"
-        f"&hourly=windspeed_80m&windspeed_unit=mph&timezone={tz}"
+        f"&hourly=windspeed_100m&windspeed_unit=mph&timezone={tz}"
     )
     for attempt in range(retries):
         try:
@@ -341,7 +461,7 @@ def fetch_wind_normals(lat, lon, tz, start_date, end_date, retries=3):
                 d = json.loads(r.read())
             dh_start, dh_end = WIND_DAYTIME_HOURS
             day_wind = defaultdict(list)
-            for ts, spd in zip(d["hourly"]["time"], d["hourly"]["windspeed_80m"]):
+            for ts, spd in zip(d["hourly"]["time"], d["hourly"]["windspeed_100m"]):
                 if spd is None: continue
                 if dh_start <= int(ts[11:13]) < dh_end:
                     day_wind[ts[:10]].append(spd)
@@ -382,9 +502,10 @@ def ensure_normals(normals):
     end_3yr   = str(date.today() - timedelta(days=1))
 
     # ── Temperature normals ──────────────────────────────────
+    all_temp_cities = CITIES + UAMPS_CITIES
     for city_list, key, fetch_fn, kwargs in [
-        (CITIES, "temp_10yr", fetch_hist_normals, {}),
-        (CITIES, "temp_3yr",  fetch_3yr_normals,  {}),
+        (all_temp_cities, "temp_10yr", fetch_hist_normals, {}),
+        (all_temp_cities, "temp_3yr",  fetch_3yr_normals,  {}),
     ]:
         missing = [c for c in city_list if f"{c[0]}_{c[1]}" not in normals[key]]
         if missing:
@@ -399,11 +520,12 @@ def ensure_normals(normals):
             time.sleep(2.0)
 
     # ── Solar normals ────────────────────────────────────────
+    all_solar_cities = SOLAR_CITIES + UAMPS_SOLAR_CITIES
     for (start, end), key in [
         (("2015-01-01", "2024-12-31"), "solar_10yr"),
         (("2022-01-01", end_3yr),      "solar_3yr"),
     ]:
-        missing = [c for c in SOLAR_CITIES if f"{c[0]}_{c[1]}" not in normals[key]]
+        missing = [c for c in all_solar_cities if f"{c[0]}_{c[1]}" not in normals[key]]
         if missing:
             print(f"  Fetching {key} for {len(missing)} city/cities (hourly ERA5 — may take several minutes)...")
         for name, state, lat, lon in missing:
@@ -416,11 +538,12 @@ def ensure_normals(normals):
             time.sleep(3.0)
 
     # ── Wind normals ─────────────────────────────────────────
+    all_wind_cities = WIND_CITIES + UAMPS_WIND_CITIES
     for (start, end), key in [
         (("2015-01-01", "2024-12-31"), "wind_10yr"),
         (("2022-01-01", end_3yr),      "wind_3yr"),
     ]:
-        missing = [c for c in WIND_CITIES if f"{c[0]}_{c[1]}" not in normals[key]]
+        missing = [c for c in all_wind_cities if f"{c[0]}_{c[1]}" not in normals[key]]
         if missing:
             print(f"  Fetching {key} for {len(missing)} city/cities (hourly ERA5)...")
         for name, state, lat, lon in missing:
@@ -438,7 +561,8 @@ def ensure_normals(normals):
 # ══════════════════════════════════════════════════════════════
 # DATA.JSON WRITER
 # ══════════════════════════════════════════════════════════════
-def write_data_json(today, all_dates, city_weather, solar_weather, wind_weather, normals):
+def write_data_json(today, all_dates, city_weather, solar_weather, wind_weather, normals,
+                    uamps_city_weather, uamps_solar_weather, uamps_wind_weather):
     data = {
         "last_refreshed": datetime.now().strftime("%A, %B %d %Y  at  %I:%M %p"),
         "today":  str(today),
@@ -460,9 +584,29 @@ def write_data_json(today, all_dates, city_weather, solar_weather, wind_weather,
             {"key": f"{n}_{s}", "full": f"{n}, {s}"}
             for n, s, *_ in WIND_CITIES
         ],
-        "city_weather":  city_weather,
-        "solar_weather": solar_weather,
-        "wind_weather":  wind_weather,
+        "uamps_cities": [
+            {
+                "key":  f"{n}_{s}",
+                "full": f"{n}, {s}",
+                "geo":  UAMPS_CITY_META.get(n, {}).get("geo", "Northern Utah"),
+                "load": UAMPS_CITY_META.get(n, {}).get("load_rank", 3),
+            }
+            for n, s, *_ in UAMPS_CITIES
+        ],
+        "uamps_solar_cities": [
+            {"key": f"{n}_{s}", "full": f"{n}, {s}"}
+            for n, s, *_ in UAMPS_SOLAR_CITIES
+        ],
+        "uamps_wind_cities": [
+            {"key": f"{n}_{s}", "full": f"{n}, {s}"}
+            for n, s, *_ in UAMPS_WIND_CITIES
+        ],
+        "city_weather":        city_weather,
+        "solar_weather":       solar_weather,
+        "wind_weather":        wind_weather,
+        "uamps_city_weather":  uamps_city_weather,
+        "uamps_solar_weather": uamps_solar_weather,
+        "uamps_wind_weather":  uamps_wind_weather,
         "normals": {
             "temp_30yr":  NOAA_NORMALS,
             "temp_10yr":  normals.get("temp_10yr",  {}),
@@ -527,8 +671,37 @@ def main():
         wind_weather[key] = fetch_wind_day(lat, lon)
         time.sleep(0.15)
 
+    print(f"\n  Fetching UAMPS temperature data ({len(UAMPS_CITIES)} cities)...")
+    uamps_city_weather = {}
+    seen_uamps = set()
+    for name, state, lat, lon in UAMPS_CITIES:
+        key = f"{name}_{state}"
+        if key in seen_uamps:
+            continue
+        seen_uamps.add(key)
+        print(f"  {name}, {state}...", flush=True)
+        uamps_city_weather[key] = fetch_weather(lat, lon)
+        time.sleep(0.15)
+
+    print(f"\n  Fetching UAMPS solar data ({len(UAMPS_SOLAR_CITIES)} sites)...")
+    uamps_solar_weather = {}
+    for name, state, lat, lon in UAMPS_SOLAR_CITIES:
+        key = f"{name}_{state}"
+        print(f"  {name}, {state}...", flush=True)
+        uamps_solar_weather[key] = fetch_solar_day(lat, lon)
+        time.sleep(0.15)
+
+    print(f"\n  Fetching UAMPS wind data ({len(UAMPS_WIND_CITIES)} sites)...")
+    uamps_wind_weather = {}
+    for name, state, lat, lon in UAMPS_WIND_CITIES:
+        key = f"{name}_{state}"
+        print(f"  {name}, {state}...", flush=True)
+        uamps_wind_weather[key] = fetch_wind_day(lat, lon)
+        time.sleep(0.15)
+
     print("\n  Writing data.json...")
-    write_data_json(today, all_dates, city_weather, solar_weather, wind_weather, normals)
+    write_data_json(today, all_dates, city_weather, solar_weather, wind_weather, normals,
+                    uamps_city_weather, uamps_solar_weather, uamps_wind_weather)
 
     print("\n  Done!")
     print("=" * 60)
