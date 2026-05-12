@@ -122,7 +122,8 @@ tr.section-banner td {
 }
 tr.section-banner td:first-child {
   position: sticky; left: 0; z-index: 2;
-  width: 150px; min-width: 150px;
+  width: 150px; min-width: 150px; max-width: 150px;
+  overflow: hidden; white-space: nowrap;
 }
 
 /* ── Alternating row colors (applied via JS) ── */
@@ -503,10 +504,11 @@ function buildSolarTable() {
   bannerTr.className = 'section-banner';
   const bannerTd = bannerTr.insertCell();
   bannerTd.style.background = '#E67E22';
-  bannerTd.textContent = '\u2600  SOLAR GENERATION  \u2014  GHI (kWh/m\u00B2) / Cloud%';
+  bannerTd.textContent = '\u2600  Solar Generation';
   const bannerFill = bannerTr.insertCell();
   bannerFill.colSpan = 1 + D.dates.length + 1 + 3;
-  bannerFill.style.background = '#E67E22';
+  bannerFill.style.cssText = 'background:#E67E22;color:#fff;font-weight:bold;font-size:11px;padding:5px 10px;';
+  bannerFill.textContent = 'GHI (kWh/m\u00B2) / Cloud%';
 
   D.solar_cities.forEach((city, idx) => {
     const tr = tbody.insertRow();
@@ -563,10 +565,11 @@ function buildWindTable() {
   bannerTr.className = 'section-banner';
   const bannerTd = bannerTr.insertCell();
   bannerTd.style.background = '#1E8449';
-  bannerTd.textContent = '\uD83D\uDCA8  WIND  \u2014  Daytime Avg 80m (mph)';
+  bannerTd.textContent = '\uD83D\uDCA8  Wind';
   const bannerFill = bannerTr.insertCell();
   bannerFill.colSpan = 1 + D.dates.length + 1 + 3;
-  bannerFill.style.background = '#1E8449';
+  bannerFill.style.cssText = 'background:#1E8449;color:#fff;font-weight:bold;font-size:11px;padding:5px 10px;';
+  bannerFill.textContent = 'Daytime Avg 80m (mph)';
 
   D.wind_cities.forEach((city, idx) => {
     const tr = tbody.insertRow();
