@@ -109,6 +109,8 @@ td.empty-cell { background: #F2F3F4; color: #AAAAAA; }
 tr.group-hdr td {
   font-weight: bold; font-size: 10px; color: #2C3E50;
   text-align: left; padding-left: 8px; border-top: 2px solid #BDC3C7;
+}
+tr.group-hdr td:first-child {
   position: sticky; left: 0; z-index: 2;
 }
 
@@ -116,6 +118,8 @@ tr.group-hdr td {
 tr.section-banner td {
   font-weight: bold; font-size: 11px; color: #fff;
   text-align: left; padding: 5px 10px;
+}
+tr.section-banner td:first-child {
   position: sticky; left: 0; z-index: 2;
 }
 
@@ -406,13 +410,15 @@ function buildTempTable(tabType) {
   getGroups(tabType).forEach(({label, color, cities}) => {
     if (!cities.length) return;
 
-    // Group header row
+    // Group header row \u2014 first cell sticky, fill cell spans the rest
     const ghTr = tbody.insertRow();
     ghTr.className = 'group-hdr';
     const ghTd = ghTr.insertCell();
-    ghTd.colSpan = 2 + D.dates.length + 1 + 3;
     ghTd.textContent = '\u25B8  ' + label.toUpperCase();
     ghTd.style.background = color;
+    const ghFill = ghTr.insertCell();
+    ghFill.colSpan = 1 + D.dates.length + 1 + 3;
+    ghFill.style.background = color;
 
     cities.forEach(city => {
       const tr = tbody.insertRow();
@@ -490,13 +496,15 @@ function buildSolarTable() {
   const tbody = table.createTBody();
   const month = new Date(D.today + 'T12:00:00').getMonth();
 
-  // Section banner
+  // Section banner \u2014 first cell sticky, fill spans rest
   const bannerTr = tbody.insertRow();
   bannerTr.className = 'section-banner';
   const bannerTd = bannerTr.insertCell();
-  bannerTd.colSpan = 2 + D.dates.length + 1 + 3;
   bannerTd.style.background = '#E67E22';
   bannerTd.textContent = '\u2600  SOLAR GENERATION  \u2014  GHI (kWh/m\u00B2) / Cloud%';
+  const bannerFill = bannerTr.insertCell();
+  bannerFill.colSpan = 1 + D.dates.length + 1 + 3;
+  bannerFill.style.background = '#E67E22';
 
   D.solar_cities.forEach((city, idx) => {
     const tr = tbody.insertRow();
@@ -548,13 +556,15 @@ function buildWindTable() {
   const tbody = table.createTBody();
   const month = new Date(D.today + 'T12:00:00').getMonth();
 
-  // Section banner
+  // Section banner \u2014 first cell sticky, fill spans rest
   const bannerTr = tbody.insertRow();
   bannerTr.className = 'section-banner';
   const bannerTd = bannerTr.insertCell();
-  bannerTd.colSpan = 2 + D.dates.length + 1 + 3;
   bannerTd.style.background = '#1E8449';
   bannerTd.textContent = '\uD83D\uDCA8  WIND  \u2014  Daytime Avg 80m (mph)';
+  const bannerFill = bannerTr.insertCell();
+  bannerFill.colSpan = 1 + D.dates.length + 1 + 3;
+  bannerFill.style.background = '#1E8449';
 
   D.wind_cities.forEach((city, idx) => {
     const tr = tbody.insertRow();
@@ -612,9 +622,11 @@ function buildUampsTempTable(tabType) {
     const ghTr = tbody.insertRow();
     ghTr.className = 'group-hdr';
     const ghTd = ghTr.insertCell();
-    ghTd.colSpan = 2 + D.dates.length + 1 + 3;
     ghTd.textContent = '▸  ' + label.toUpperCase();
     ghTd.style.background = color;
+    const ghFill = ghTr.insertCell();
+    ghFill.colSpan = 1 + D.dates.length + 1 + 3;
+    ghFill.style.background = color;
 
     cities.forEach(city => {
       const tr = tbody.insertRow();
