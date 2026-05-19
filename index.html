@@ -142,6 +142,7 @@ tr.row-odd  td.city-cell { background: #FDFEFE; }
 <div class="controls">
   <button id="tab-btn-geo"  class="tab-btn active" onclick="switchTab('geo')">By Geography</button>
   <button id="tab-btn-load" class="tab-btn"        onclick="switchTab('load')">By Load Size</button>
+  <button id="refresh-btn" class="tab-btn" onclick="triggerRefresh()" style="margin-left:8px;">&#x21BA; Refresh Data</button>
   <div class="baseline-ctrl">
     Color Baseline:
     <select id="baseline-select" onchange="updateTempColors()">
@@ -158,6 +159,58 @@ tr.row-odd  td.city-cell { background: #FDFEFE; }
 <div id="load-content" class="tab-content"></div>
 
 <script>
+// ═══════════════════════════════════════════════════
+// REFRESH TRIGGER
+// ═══════════════════════════════════════════════════
+const GH_PAT  = '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';
+const GH_REPO = 'jb104805/weather-dashboard';
+const GH_WF   = 'refresh.yml';
+
+function triggerRefresh() {
+  const btn = document.getElementById('refresh-btn');
+  btn.textContent = '⟳ Triggering…';
+  btn.disabled = true;
+
+  fetch(`https://api.github.com/repos/${GH_REPO}/actions/workflows/${GH_WF}/dispatches`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${GH_PAT}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ref: 'main' }),
+  })
+  .then(res => {
+    if (res.status === 204) {
+      btn.textContent = '✓ Refresh Started';
+      btn.style.background = '#27AE60';
+      setTimeout(() => {
+        btn.textContent = '↺ Refresh Data';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 6000);
+    } else {
+      btn.textContent = '✗ Error ' + res.status;
+      btn.style.background = '#E74C3C';
+      setTimeout(() => {
+        btn.textContent = '↺ Refresh Data';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    }
+  })
+  .catch(() => {
+    btn.textContent = '✗ Network Error';
+    btn.style.background = '#E74C3C';
+    setTimeout(() => {
+      btn.textContent = '↺ Refresh Data';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
+  });
+}
+
 // ═══════════════════════════════════════════════════
 // COLOR UTILITIES
 // ═══════════════════════════════════════════════════
