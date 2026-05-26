@@ -181,7 +181,7 @@ function triggerRefresh() {
         btn.disabled = false;
       }, 6000);
     } else {
-      btn.textContent = '✗ Error ' + res.status;
+      btn.textContent = '✗ Error ' + data.status;
       btn.style.background = '#E74C3C';
       setTimeout(() => {
         btn.textContent = '↺ Refresh Data';
