@@ -162,27 +162,17 @@ tr.row-odd  td.city-cell { background: #FDFEFE; }
 // ═══════════════════════════════════════════════════
 // REFRESH TRIGGER
 // ═══════════════════════════════════════════════════
-const GH_PAT  = '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';
-const GH_REPO = 'jb104805/weather-dashboard';
-const GH_WF   = 'refresh.yml';
+const WORKER_URL = 'https://weather-refresh.jbond-d1c.workers.dev';
 
 function triggerRefresh() {
   const btn = document.getElementById('refresh-btn');
   btn.textContent = '⟳ Triggering…';
   btn.disabled = true;
 
-  fetch(`https://api.github.com/repos/${GH_REPO}/actions/workflows/${GH_WF}/dispatches`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${GH_PAT}`,
-      'Accept': 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ ref: 'main' }),
-  })
-  .then(res => {
-    if (res.status === 204) {
+  fetch(WORKER_URL, { method: 'POST' })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === 204) {
       btn.textContent = '✓ Refresh Started';
       btn.style.background = '#27AE60';
       setTimeout(() => {
