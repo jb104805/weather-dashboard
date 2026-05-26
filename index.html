@@ -164,8 +164,23 @@ tr.row-odd  td.city-cell { background: #FDFEFE; }
 // ═══════════════════════════════════════════════════
 const WORKER_URL = 'https://weather-refresh.jbond-d1c.workers.dev';
 
+const REFRESH_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
+
 function triggerRefresh() {
   const btn = document.getElementById('refresh-btn');
+  const lastRefresh = parseInt(localStorage.getItem('last_refresh') || '0');
+  const now = Date.now();
+
+  if (now - lastRefresh < REFRESH_COOLDOWN_MS) {
+    btn.textContent = '✓ Data Up to Date';
+    btn.style.background = '#2980B9';
+    setTimeout(() => {
+      btn.textContent = '↺ Refresh Data';
+      btn.style.background = '';
+    }, 4000);
+    return;
+  }
+
   btn.textContent = '⟳ Triggering…';
   btn.disabled = true;
 
@@ -173,6 +188,7 @@ function triggerRefresh() {
   .then(res => res.json())
   .then(data => {
     if (data.status === 204) {
+      localStorage.setItem('last_refresh', String(now));
       btn.textContent = '✓ Refresh Started';
       btn.style.background = '#27AE60';
       setTimeout(() => {
