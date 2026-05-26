@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
     # Also allows manual trigger from GitHub Actions tab
 
+concurrency:
+  group: refresh
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
