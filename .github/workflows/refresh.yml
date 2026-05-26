@@ -2,8 +2,8 @@ name: Refresh Weather Dashboard
 
 on:
   schedule:
-    # Runs daily at 13:00 UTC = 7am MDT / 6am MST (Mountain Time)
-    - cron: '0 10 * * *'
+    # Runs daily at 14:00 UTC = 8am MDT / 7am MST (Mountain Time)
+    - cron: '0 14 * * *'
   workflow_dispatch:
     # Also allows manual trigger from GitHub Actions tab
 
@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 60   # generous timeout for first-run normals fetch
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-      
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -35,4 +35,5 @@ jobs:
           git config user.email "actions@github.com"
           git add data.json normals.json
           git diff --staged --quiet || git commit -m "Auto-refresh: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git pull --rebase
           git push
