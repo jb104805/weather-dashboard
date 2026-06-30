@@ -951,6 +951,10 @@ async function init() {
     setupSyncScroll();
     switchTab('geo');
 
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.table-wrap').forEach(w => { w.scrollLeft = w.scrollWidth; });
+    });
+
   } catch (err) {
     document.getElementById('loading').innerHTML =
       'Error loading dashboard data: ' + err.message +
