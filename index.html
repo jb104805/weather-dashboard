@@ -469,6 +469,32 @@ function buildTempTable(tabType) {
   const month = new Date(D.today + 'T12:00:00').getMonth();
   let rowIdx = 0;
 
+  // ── Palo Verde HLH / LLH price rows ──
+  const prices = D.prices || {};
+  [['hlh', 'PV HLH $/MWh'], ['llh', 'PV LLH $/MWh']].forEach(([type, label]) => {
+    const tr = tbody.insertRow();
+    const nameTd = tr.insertCell();
+    nameTd.className = 'city-cell';
+    nameTd.style.cssText = 'font-size:10px;font-weight:bold;color:#6E2F00;background:#FEF9E7;';
+    nameTd.textContent = label;
+
+    D.dates.forEach(ds => {
+      const td = tr.insertCell();
+      td.style.cssText = 'text-align:center;font-size:11px;color:#6E2F00;background:#FEF9E7;';
+      if (ds <= D.today) {
+        const val = (prices[ds] || {})[type];
+        td.textContent = val != null ? '$' + val.toFixed(2) : '';
+      }
+    });
+
+    const divTd = tr.insertCell();
+    divTd.style.cssText = 'background:#BDC3C7;padding:0;';
+    for (let i = 0; i < 3; i++) {
+      const nd = tr.insertCell();
+      nd.style.background = '#FEF9E7';
+    }
+  });
+
   getGroups(tabType).forEach(({label, color, cities}) => {
     if (!cities.length) return;
 
@@ -901,8 +927,11 @@ function switchTab(tabType) {
 // ═══════════════════════════════════════════════════
 async function init() {
   try {
-    const res = await fetch('data.json');
-    const raw = await res.json();
+    const [dataRes, pricesRes] = await Promise.all([
+      fetch('data.json'),
+      fetch('prices.json').catch(() => null),
+    ]);
+    const raw = await dataRes.json();
 
     if (raw.pending || !raw.today) {
       document.getElementById('loading').innerHTML =
@@ -912,6 +941,8 @@ async function init() {
     }
 
     D = raw;
+    D.prices = pricesRes ? await pricesRes.json().catch(() => ({})) : {};
+
     document.getElementById('loading').style.display = 'none';
     document.getElementById('last-refreshed').textContent = 'Last refreshed: ' + D.last_refreshed;
 
