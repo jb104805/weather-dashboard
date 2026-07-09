@@ -163,7 +163,14 @@ tr.row-odd  td.city-cell { background: #FDFEFE; }
   <button id="tab-btn-load" class="tab-btn"        onclick="switchTab('load')">By Load Size</button>
   <button id="refresh-btn" class="tab-btn" onclick="triggerRefresh()" style="margin-left:8px;">&#x21BA; Refresh Data</button>
   <div class="baseline-ctrl">
-    Color Baseline:
+    Color Mode:
+    <select id="colormode-select" onchange="onColorModeChange()">
+      <option value="deviation" selected>Deviation</option>
+      <option value="temp">Temp</option>
+    </select>
+  </div>
+  <div class="baseline-ctrl" id="baseline-ctrl">
+    Baseline:
     <select id="baseline-select" onchange="updateTempColors()">
       <option value="30yr">30-yr</option>
       <option value="10yr">10-yr</option>
@@ -240,16 +247,31 @@ function triggerRefresh() {
 // ═══════════════════════════════════════════════════
 // COLOR UTILITIES
 // ═══════════════════════════════════════════════════
+// Shared warm-side palette — used by both deviation and temp-mode coloring
+const C_NEUT = ['#FFFFFF','#000'];
+const C_HOT1 = ['#FADBD8','#000'];
+const C_HOT2 = ['#F1948A','#000'];
+const C_HOT3 = ['#E74C3C','#fff'];
+const C_HOT4 = ['#922B21','#fff'];
+
 function devColor(d) {
   if (d <= -15) return ['#1A5276','#fff'];
   if (d <= -10) return ['#2980B9','#fff'];
   if (d <=  -5) return ['#AED6F1','#000'];
   if (d <=  -3) return ['#D6EAF8','#000'];
-  if (d <    3) return ['#FFFFFF','#000'];
-  if (d <    5) return ['#FADBD8','#000'];
-  if (d <    8) return ['#F1948A','#000'];
-  if (d <   15) return ['#E74C3C','#fff'];
-  return ['#922B21','#fff'];
+  if (d <    3) return C_NEUT;
+  if (d <    5) return C_HOT1;
+  if (d <    8) return C_HOT2;
+  if (d <   15) return C_HOT3;
+  return C_HOT4;
+}
+
+function tempColor(hi) {
+  if (hi >= 105) return C_HOT4;
+  if (hi >=  95) return C_HOT3;
+  if (hi >=  85) return C_HOT2;
+  if (hi >=  75) return C_HOT1;
+  return C_NEUT;
 }
 
 function spiColor(spi) {
@@ -305,7 +327,8 @@ function fmtDay(ds) {
 let D = null; // loaded data.json
 let currentTab = 'geo';
 
-function baseline() { return document.getElementById('baseline-select').value; }
+function baseline()  { return document.getElementById('baseline-select').value; }
+function colorMode() { return document.getElementById('colormode-select').value; }
 
 // ═══════════════════════════════════════════════════
 // LEGEND BUILDER
@@ -577,6 +600,13 @@ function applyTempColor(td, cityKey, dateStr, month, bl) {
   const temps = src[cityKey]?.[dateStr];
   if (!temps) return;
   const hi = temps[0];
+  if (colorMode() === 'temp') {
+    const [bg, fg] = tempColor(hi);
+    td.style.background = bg;
+    td.style.color = fg;
+    td.title = `${hi}°F high`;
+    return;
+  }
   const normSets = {
     '30yr': D.normals.temp_30yr,
     '10yr': D.normals.temp_10yr,
@@ -589,6 +619,14 @@ function applyTempColor(td, cityKey, dateStr, month, bl) {
   td.style.background = bg;
   td.style.color = fg;
   td.title = `${dev > 0 ? '+' : ''}${dev}°F vs ${bl} normal`;
+}
+
+function onColorModeChange() {
+  const isTemp = colorMode() === 'temp';
+  const ctrl = document.getElementById('baseline-ctrl');
+  ctrl.style.opacity = isTemp ? '0.35' : '1';
+  ctrl.style.pointerEvents = isTemp ? 'none' : '';
+  updateTempColors();
 }
 
 function updateTempColors() {
