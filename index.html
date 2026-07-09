@@ -17,6 +17,9 @@ header h1 { font-size: 18px; font-weight: bold; flex: 1 1 auto; }
 header .sub { font-size: 11px; color: #AEB6BF; white-space: nowrap; }
 #last-refreshed { font-size: 11px; color: #AEB6BF; }
 
+/* ── Sticky top bar ── */
+.sticky-top { position: sticky; top: 0; z-index: 50; }
+
 /* ── Controls bar ── */
 .controls {
   background: #2C3E50; padding: 8px 20px;
@@ -148,6 +151,7 @@ tr.row-odd  td.city-cell { background: #FDFEFE; }
 </head>
 <body>
 
+<div class="sticky-top">
 <header>
   <h1>CAISO / PACE &nbsp; Weather Deviation Dashboard</h1>
   <span class="sub">Lehi City Power Department</span>
@@ -166,6 +170,7 @@ tr.row-odd  td.city-cell { background: #FDFEFE; }
       <option value="3yr" selected>3-yr</option>
     </select>
   </div>
+</div>
 </div>
 
 <div id="loading">Loading dashboard data&hellip;</div>
