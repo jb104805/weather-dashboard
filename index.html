@@ -129,6 +129,18 @@ tr.section-banner td:first-child {
 /* ── Alternating row colors (applied via JS) ── */
 tr.row-even td.city-cell { background: #F4F6F7; }
 tr.row-odd  td.city-cell { background: #FDFEFE; }
+
+/* ── Trade tooltip ── */
+#trade-tooltip {
+  position: fixed; z-index: 9999; pointer-events: none; display: none;
+  background: #1B2631; color: #ECF0F1; border-radius: 6px;
+  padding: 10px 14px; font-size: 11px; line-height: 1.55;
+  max-width: 380px; min-width: 160px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.tt-date  { font-weight: bold; font-size: 12px; color: #E67E22; margin-bottom: 5px; }
+.tt-trade { padding: 3px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+.tt-none  { color: #AEB6BF; font-style: italic; }
 </style>
 </head>
 <body>
@@ -495,6 +507,8 @@ function buildTempTable(tabType) {
     }
   });
 
+  buildTradesRow(tbody);
+
   getGroups(tabType).forEach(({label, color, cities}) => {
     if (!cities.length) return;
 
@@ -733,6 +747,8 @@ function buildUampsTempTable(tabType) {
     }
   });
 
+  buildTradesRow(tbody);
+
   getUampsGroups(tabType).forEach(({label, color, cities}) => {
     if (!cities.length) return;
     const ghTr = tbody.insertRow();
@@ -859,6 +875,62 @@ function buildUampsWindTable() {
 }
 
 // ═══════════════════════════════════════════════════
+// TRADE TOOLTIP
+// ═══════════════════════════════════════════════════
+function showTradeTooltip(e, ds, trades) {
+  const tt = document.getElementById('trade-tooltip');
+  let html = `<div class="tt-date">${fmtDate(ds)} (${fmtDay(ds)})</div>`;
+  if (trades && trades.length) {
+    html += trades.map(t => `<div class="tt-trade">${t}</div>`).join('');
+  } else {
+    html += '<div class="tt-none">No trades</div>';
+  }
+  tt.innerHTML = html;
+  tt.style.display = 'block';
+  positionTooltip(e);
+}
+
+function positionTooltip(e) {
+  const tt = document.getElementById('trade-tooltip');
+  const x = e.clientX + 16, y = e.clientY + 10;
+  tt.style.left = (x + tt.offsetWidth  > window.innerWidth  ? e.clientX - tt.offsetWidth  - 8 : x) + 'px';
+  tt.style.top  = (y + tt.offsetHeight > window.innerHeight ? e.clientY - tt.offsetHeight - 8 : y) + 'px';
+}
+
+function hideTradeTooltip() {
+  document.getElementById('trade-tooltip').style.display = 'none';
+}
+
+function buildTradesRow(tbody) {
+  const trades = D.trades || {};
+  const tr = tbody.insertRow();
+  const nameTd = tr.insertCell();
+  nameTd.className = 'city-cell';
+  nameTd.style.cssText = 'font-size:10px;font-weight:bold;color:#5D6D7E;background:#F4F6F7;';
+  nameTd.textContent = 'Trades';
+
+  D.dates.forEach(ds => {
+    const td = tr.insertCell();
+    const dayTrades = trades[ds] || [];
+    if (ds <= D.today && dayTrades.length) {
+      td.style.cssText = 'background:#EBF5FB;cursor:default;';
+      td.addEventListener('mouseover', e => showTradeTooltip(e, ds, dayTrades));
+      td.addEventListener('mousemove', positionTooltip);
+      td.addEventListener('mouseout', hideTradeTooltip);
+    } else {
+      td.style.background = '#F4F6F7';
+    }
+  });
+
+  const divTd = tr.insertCell();
+  divTd.style.cssText = 'background:#BDC3C7;padding:0;';
+  for (let i = 0; i < 3; i++) {
+    const nd = tr.insertCell();
+    nd.style.background = '#F4F6F7';
+  }
+}
+
+// ═══════════════════════════════════════════════════
 // SYNCED HORIZONTAL SCROLL
 // ═══════════════════════════════════════════════════
 function setupSyncScroll() {
@@ -953,9 +1025,10 @@ function switchTab(tabType) {
 // ═══════════════════════════════════════════════════
 async function init() {
   try {
-    const [dataRes, pricesRes] = await Promise.all([
+    const [dataRes, pricesRes, tradesRes] = await Promise.all([
       fetch('data.json'),
       fetch('prices.json').catch(() => null),
+      fetch('trades.json').catch(() => null),
     ]);
     const raw = await dataRes.json();
 
@@ -968,6 +1041,7 @@ async function init() {
 
     D = raw;
     D.prices = pricesRes ? await pricesRes.json().catch(() => ({})) : {};
+    D.trades = tradesRes ? await tradesRes.json().catch(() => ({})) : {};
 
     document.getElementById('loading').style.display = 'none';
     document.getElementById('last-refreshed').textContent = 'Last refreshed: ' + D.last_refreshed;
@@ -990,5 +1064,6 @@ async function init() {
 
 init();
 </script>
+<div id="trade-tooltip"></div>
 </body>
 </html>
