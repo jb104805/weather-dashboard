@@ -334,20 +334,34 @@ function colorMode() { return document.getElementById('colormode-select').value;
 // LEGEND BUILDER
 // ═══════════════════════════════════════════════════
 function buildTempLegend() {
-  const chips = [
-    {label:'≤-15°F', bg:'#1A5276', fg:'#fff'},
-    {label:'-10°F',  bg:'#2980B9', fg:'#fff'},
-    {label:'-5°F',   bg:'#AED6F1', fg:'#000'},
-    {label:'-3°F',   bg:'#D6EAF8', fg:'#000'},
-    {label:'0°F',    bg:'#FFFFFF', fg:'#000'},
-    {label:'+3°F',   bg:'#FADBD8', fg:'#000'},
-    {label:'+5°F',   bg:'#F1948A', fg:'#000'},
-    {label:'+8°F',   bg:'#E74C3C', fg:'#fff'},
-    {label:'≥+15°F', bg:'#922B21', fg:'#fff'},
-  ];
   const div = document.createElement('div');
-  div.className = 'legend';
-  div.innerHTML = '<span class="legend-label">Deviation from Normal High &rarr;</span>';
+  div.className = 'legend temp-legend';
+  _renderTempLegend(div);
+  return div;
+}
+
+function _renderTempLegend(div) {
+  const isTemp = colorMode() === 'temp';
+  const chips = isTemp ? [
+    {label:'< 75°F',  bg:C_NEUT[0], fg:C_NEUT[1]},
+    {label:'75°F',    bg:C_HOT1[0], fg:C_HOT1[1]},
+    {label:'85°F',    bg:C_HOT2[0], fg:C_HOT2[1]},
+    {label:'95°F',    bg:C_HOT3[0], fg:C_HOT3[1]},
+    {label:'≥ 105°F', bg:C_HOT4[0], fg:C_HOT4[1]},
+  ] : [
+    {label:'≤-15°F',  bg:'#1A5276', fg:'#fff'},
+    {label:'-10°F',   bg:'#2980B9', fg:'#fff'},
+    {label:'-5°F',    bg:'#AED6F1', fg:'#000'},
+    {label:'-3°F',    bg:'#D6EAF8', fg:'#000'},
+    {label:'0°F',     bg:C_NEUT[0], fg:C_NEUT[1]},
+    {label:'+3°F',    bg:C_HOT1[0], fg:C_HOT1[1]},
+    {label:'+5°F',    bg:C_HOT2[0], fg:C_HOT2[1]},
+    {label:'+8°F',    bg:C_HOT3[0], fg:C_HOT3[1]},
+    {label:'≥+15°F',  bg:C_HOT4[0], fg:C_HOT4[1]},
+  ];
+  div.innerHTML = isTemp
+    ? '<span class="legend-label">Absolute High Temp &rarr;</span>'
+    : '<span class="legend-label">Deviation from Normal High &rarr;</span>';
   chips.forEach(c => {
     const s = document.createElement('span');
     s.className = 'legend-chip';
@@ -356,7 +370,10 @@ function buildTempLegend() {
     s.style.color = c.fg;
     div.appendChild(s);
   });
-  return div;
+}
+
+function updateTempLegend() {
+  document.querySelectorAll('.temp-legend').forEach(div => _renderTempLegend(div));
 }
 
 function buildSolarLegend() {
@@ -627,6 +644,7 @@ function onColorModeChange() {
   ctrl.style.opacity = isTemp ? '0.35' : '1';
   ctrl.style.pointerEvents = isTemp ? 'none' : '';
   updateTempColors();
+  updateTempLegend();
 }
 
 function updateTempColors() {
