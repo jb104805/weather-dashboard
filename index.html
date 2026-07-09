@@ -962,10 +962,14 @@ function _setupOneStickyHeader(tableWrap) {
   const origThead = table.querySelector('thead');
   if (!origThead) return null;
 
+  // Measure the sticky header+controls bar so the clone sits below it
+  const stickyBar = document.querySelector('.sticky-top');
+  const barH = stickyBar ? stickyBar.offsetHeight : 0;
+
   // Build fixed-position clone containing only the frozen rows
   const clone = document.createElement('div');
   clone.className = 'sticky-clone-wrap';
-  clone.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:200;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;display:none;background:#F4F6F7;box-shadow:0 2px 8px rgba(0,0,0,0.25);';
+  clone.style.cssText = 'position:fixed;top:' + barH + 'px;left:0;right:0;z-index:200;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;display:none;background:#F4F6F7;box-shadow:0 2px 8px rgba(0,0,0,0.25);';
 
   const cloneTable = document.createElement('table');
   cloneTable.style.cssText = 'table-layout:fixed;border-collapse:collapse;font-size:11px;min-width:100%;';
@@ -1014,7 +1018,7 @@ function _setupOneStickyHeader(tableWrap) {
   function onPageScroll() {
     const theadRect = origThead.getBoundingClientRect();
     const tableRect  = table.getBoundingClientRect();
-    if (theadRect.bottom < 0 && tableRect.bottom > 0) {
+    if (theadRect.bottom < barH && tableRect.bottom > barH) {
       const wrapRect = tableWrap.getBoundingClientRect();
       clone.style.left  = wrapRect.left + 'px';
       clone.style.right = (window.innerWidth - wrapRect.right) + 'px';
