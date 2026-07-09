@@ -64,6 +64,7 @@ header .sub { font-size: 11px; color: #AEB6BF; white-space: nowrap; }
 
 /* ── Table wrapper (horizontal scroll) ── */
 .table-wrap { overflow-x: auto; border-radius: 4px; margin-bottom: 4px; }
+.temp-table-wrap { max-height: 520px; overflow-y: auto; }
 table {
   border-collapse: collapse; min-width: 100%;
   table-layout: fixed; font-size: 11px;
@@ -483,8 +484,9 @@ function buildTempTable(tabType) {
 
   // ── Palo Verde HLH / LLH price rows ──
   const prices = D.prices || {};
-  [['hlh', 'PV HLH $/MWh'], ['llh', 'PV LLH $/MWh']].forEach(([type, label]) => {
+  [['hlh', 'PV HLH $/MWh'], ['llh', 'PV LLH $/MWh']].forEach(([type, label], ri) => {
     const tr = tbody.insertRow();
+    tr.className = `frozen-row frozen-row-${ri + 1}`;
     const nameTd = tr.insertCell();
     nameTd.className = 'city-cell';
     nameTd.style.cssText = 'font-size:10px;font-weight:bold;color:#6E2F00;background:#FEF9E7;';
@@ -723,8 +725,9 @@ function buildUampsTempTable(tabType) {
 
   // ── Palo Verde HLH / LLH price rows ──
   const prices = D.prices || {};
-  [['hlh', 'PV HLH $/MWh'], ['llh', 'PV LLH $/MWh']].forEach(([type, label]) => {
+  [['hlh', 'PV HLH $/MWh'], ['llh', 'PV LLH $/MWh']].forEach(([type, label], ri) => {
     const tr = tbody.insertRow();
+    tr.className = `frozen-row frozen-row-${ri + 1}`;
     const nameTd = tr.insertCell();
     nameTd.className = 'city-cell';
     nameTd.style.cssText = 'font-size:10px;font-weight:bold;color:#6E2F00;background:#FEF9E7;';
@@ -904,6 +907,7 @@ function hideTradeTooltip() {
 function buildTradesRow(tbody) {
   const trades = D.trades || {};
   const tr = tbody.insertRow();
+  tr.className = 'frozen-row frozen-row-3';
   const nameTd = tr.insertCell();
   nameTd.className = 'city-cell';
   nameTd.style.cssText = 'font-size:10px;font-weight:bold;color:#5D6D7E;background:#F4F6F7;';
@@ -928,6 +932,40 @@ function buildTradesRow(tbody) {
     const nd = tr.insertCell();
     nd.style.background = '#F4F6F7';
   }
+}
+
+// ═══════════════════════════════════════════════════
+// FREEZE PANES
+// ═══════════════════════════════════════════════════
+function applyFreezeRows(tableWrap) {
+  const table = tableWrap.querySelector('table');
+  if (!table) return;
+
+  // Freeze thead rows — measure and stack top values
+  let top = 0;
+  Array.from(table.querySelectorAll('thead tr')).forEach(row => {
+    const h = row.offsetHeight || 28;
+    Array.from(row.cells).forEach((cell, ci) => {
+      cell.style.position = 'sticky';
+      cell.style.top = top + 'px';
+      if (ci === 0) { cell.style.left = '0px'; cell.style.zIndex = '5'; }
+      else          { cell.style.zIndex = '4'; }
+    });
+    top += h;
+  });
+
+  // Freeze the first 3 tbody rows (PV HLH, PV LLH, Trades)
+  Array.from(table.querySelectorAll('tbody tr.frozen-row')).forEach(row => {
+    const h = row.offsetHeight || 24;
+    Array.from(row.cells).forEach(cell => {
+      const isLeft = cell.classList.contains('city-cell');
+      cell.style.position = 'sticky';
+      cell.style.top = top + 'px';
+      cell.style.zIndex = isLeft ? '3' : '2';
+      if (isLeft) cell.style.left = '0px';
+    });
+    top += h;
+  });
 }
 
 // ═══════════════════════════════════════════════════
@@ -960,7 +998,7 @@ function renderTab(tabType) {
   // Temperature
   section.appendChild(buildTempLegend());
   const tempWrap = document.createElement('div');
-  tempWrap.className = 'table-wrap';
+  tempWrap.className = 'table-wrap temp-table-wrap';
   tempWrap.appendChild(buildTempTable(tabType));
   section.appendChild(tempWrap);
 
@@ -988,7 +1026,7 @@ function renderTab(tabType) {
 
   section.appendChild(buildTempLegend());
   const uampsTempWrap = document.createElement('div');
-  uampsTempWrap.className = 'table-wrap';
+  uampsTempWrap.className = 'table-wrap temp-table-wrap';
   uampsTempWrap.appendChild(buildUampsTempTable(tabType));
   section.appendChild(uampsTempWrap);
 
@@ -1017,7 +1055,13 @@ function switchTab(tabType) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.getElementById(`tab-btn-${tabType}`).classList.add('active');
-  document.getElementById(`${tabType}-content`).classList.add('active');
+  const content = document.getElementById(`${tabType}-content`);
+  content.classList.add('active');
+
+  requestAnimationFrame(() => {
+    content.querySelectorAll('.table-wrap').forEach(w => { w.scrollLeft = w.scrollWidth; });
+    content.querySelectorAll('.temp-table-wrap').forEach(w => applyFreezeRows(w));
+  });
 }
 
 // ═══════════════════════════════════════════════════
@@ -1053,6 +1097,7 @@ async function init() {
 
     requestAnimationFrame(() => {
       document.querySelectorAll('.table-wrap').forEach(w => { w.scrollLeft = w.scrollWidth; });
+      document.querySelectorAll('.temp-table-wrap').forEach(w => applyFreezeRows(w));
     });
 
   } catch (err) {
