@@ -63,8 +63,7 @@ header .sub { font-size: 11px; color: #AEB6BF; white-space: nowrap; }
 }
 
 /* ── Table wrapper (horizontal scroll) ── */
-.table-wrap { overflow-x: auto; border-radius: 4px; margin-bottom: 4px; }
-.temp-table-wrap { max-height: 520px; overflow-y: auto; }
+.table-wrap { overflow-x: auto; overflow-y: clip; border-radius: 4px; margin-bottom: 4px; }
 table {
   border-collapse: collapse; min-width: 100%;
   table-layout: fixed; font-size: 11px;
