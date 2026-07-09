@@ -130,6 +130,9 @@ tr.section-banner td:first-child {
 tr.row-even td.city-cell { background: #F4F6F7; }
 tr.row-odd  td.city-cell { background: #FDFEFE; }
 
+/* ── Sticky clone scrollbar (hidden) ── */
+.sticky-clone-wrap::-webkit-scrollbar { display: none; }
+
 /* ── Trade tooltip ── */
 #trade-tooltip {
   position: fixed; z-index: 9999; pointer-events: none; display: none;
@@ -914,6 +917,7 @@ function buildTradesRow(tbody) {
 
   D.dates.forEach(ds => {
     const td = tr.insertCell();
+    td.dataset.date = ds;
     const dayTrades = trades[ds] || [];
     if (ds <= D.today && dayTrades.length) {
       td.style.cssText = 'background:#EBF5FB;cursor:default;';
@@ -934,37 +938,95 @@ function buildTradesRow(tbody) {
 }
 
 // ═══════════════════════════════════════════════════
-// FREEZE PANES
+// FREEZE PANES — JS fixed-position clone
 // ═══════════════════════════════════════════════════
-function applyFreezeRows(tableWrap) {
+let _stickyCleanups = [];
+
+function setupStickyHeaders() {
+  _stickyCleanups.forEach(fn => fn());
+  _stickyCleanups = [];
+  document.querySelectorAll('.temp-table-wrap').forEach(tw => {
+    const cleanup = _setupOneStickyHeader(tw);
+    if (cleanup) _stickyCleanups.push(cleanup);
+  });
+}
+
+function _setupOneStickyHeader(tableWrap) {
   const table = tableWrap.querySelector('table');
-  if (!table) return;
+  if (!table) return null;
+  const origThead = table.querySelector('thead');
+  if (!origThead) return null;
 
-  // Freeze thead rows — measure and stack top values
-  let top = 0;
-  Array.from(table.querySelectorAll('thead tr')).forEach(row => {
-    const h = row.offsetHeight || 28;
-    Array.from(row.cells).forEach((cell, ci) => {
-      cell.style.position = 'sticky';
-      cell.style.top = top + 'px';
-      if (ci === 0) { cell.style.left = '0px'; cell.style.zIndex = '5'; }
-      else          { cell.style.zIndex = '4'; }
-    });
-    top += h;
-  });
+  // Build fixed-position clone containing only the frozen rows
+  const clone = document.createElement('div');
+  clone.className = 'sticky-clone-wrap';
+  clone.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:200;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;display:none;background:#F4F6F7;box-shadow:0 2px 8px rgba(0,0,0,0.25);';
 
-  // Freeze the first 3 tbody rows (PV HLH, PV LLH, Trades)
-  Array.from(table.querySelectorAll('tbody tr.frozen-row')).forEach(row => {
-    const h = row.offsetHeight || 24;
-    Array.from(row.cells).forEach(cell => {
-      const isLeft = cell.classList.contains('city-cell');
-      cell.style.position = 'sticky';
-      cell.style.top = top + 'px';
-      cell.style.zIndex = isLeft ? '3' : '2';
-      if (isLeft) cell.style.left = '0px';
-    });
-    top += h;
+  const cloneTable = document.createElement('table');
+  cloneTable.style.cssText = 'table-layout:fixed;border-collapse:collapse;font-size:11px;min-width:100%;';
+
+  const origColgroup = table.querySelector('colgroup');
+  if (origColgroup) cloneTable.appendChild(origColgroup.cloneNode(true));
+  cloneTable.appendChild(origThead.cloneNode(true));
+
+  // Clone frozen body rows and re-attach trade tooltips
+  const cloneTbody = document.createElement('tbody');
+  const origFrozenRows = Array.from(table.querySelectorAll('tbody tr.frozen-row'));
+  origFrozenRows.forEach((origRow, ri) => {
+    const row = origRow.cloneNode(true);
+    if (ri === origFrozenRows.length - 1) { // Trades row
+      Array.from(row.cells).forEach(cell => {
+        const ds = cell.dataset.date;
+        if (!ds) return;
+        const dayTrades = (D.trades || {})[ds] || [];
+        if (dayTrades.length) {
+          cell.addEventListener('mouseover', e => showTradeTooltip(e, ds, dayTrades));
+          cell.addEventListener('mousemove', positionTooltip);
+          cell.addEventListener('mouseout', hideTradeTooltip);
+        }
+      });
+    }
+    cloneTbody.appendChild(row);
   });
+  cloneTable.appendChild(cloneTbody);
+  clone.appendChild(cloneTable);
+  document.body.appendChild(clone);
+
+  // Bidirectional horizontal scroll sync
+  let _syncing = false;
+  function tableToClone() {
+    if (_syncing) return; _syncing = true;
+    clone.scrollLeft = tableWrap.scrollLeft; _syncing = false;
+  }
+  function cloneToTable() {
+    if (_syncing) return; _syncing = true;
+    tableWrap.scrollLeft = clone.scrollLeft; _syncing = false;
+  }
+  tableWrap.addEventListener('scroll', tableToClone);
+  clone.addEventListener('scroll', cloneToTable);
+
+  // Show clone when thead has scrolled above viewport but table is still visible
+  function onPageScroll() {
+    const theadRect = origThead.getBoundingClientRect();
+    const tableRect  = table.getBoundingClientRect();
+    if (theadRect.bottom < 0 && tableRect.bottom > 0) {
+      const wrapRect = tableWrap.getBoundingClientRect();
+      clone.style.left  = wrapRect.left + 'px';
+      clone.style.right = (window.innerWidth - wrapRect.right) + 'px';
+      clone.style.display = 'block';
+      clone.scrollLeft = tableWrap.scrollLeft;
+    } else {
+      clone.style.display = 'none';
+    }
+  }
+  window.addEventListener('scroll', onPageScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener('scroll', onPageScroll);
+    tableWrap.removeEventListener('scroll', tableToClone);
+    clone.removeEventListener('scroll', cloneToTable);
+    clone.remove();
+  };
 }
 
 // ═══════════════════════════════════════════════════
@@ -1059,7 +1121,6 @@ function switchTab(tabType) {
 
   requestAnimationFrame(() => {
     content.querySelectorAll('.table-wrap').forEach(w => { w.scrollLeft = w.scrollWidth; });
-    content.querySelectorAll('.temp-table-wrap').forEach(w => applyFreezeRows(w));
   });
 }
 
@@ -1093,10 +1154,10 @@ async function init() {
     renderTab('load');
     setupSyncScroll();
     switchTab('load');
+    setupStickyHeaders();
 
     requestAnimationFrame(() => {
       document.querySelectorAll('.table-wrap').forEach(w => { w.scrollLeft = w.scrollWidth; });
-      document.querySelectorAll('.temp-table-wrap').forEach(w => applyFreezeRows(w));
     });
 
   } catch (err) {
