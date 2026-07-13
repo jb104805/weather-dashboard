@@ -1,8 +1,4 @@
 {
-  "2026-06-24": [
-    "Bought 416mwh shape H9-14 (5,20,45,105,136,105) @ $22 from PAC",
-    "Bought 1286mwh shape H2,15-1 (20,170,172,174,170,140,130,60,85,40,85,40) @ $57 from UMPA"
-  ],
   "2026-06-25": [
     "Bought 541mwh shape H12-17 (56,95,45,100,130,115) @ $20 from PAC",
     "Bought 584mwh shape H18-1 (120,100,118,70,75,20,75,6) @ $57 from UMPA"
@@ -87,5 +83,9 @@
     "Bought 296 MWH shape Sun only @45 from Dynasty",
     "Bought 50 MWH Sun (HE12-24) & Mon (HE1-7, 10-24) @$38.5 from TEA",
     "Bought at 95 MHW shape Sun, 948 MWH shape Mon @$85 from Altop"
+  ],
+  "2026-07-14": [
+    "Bought 1805mwh HE2-4,12-1 (45,15,20,5,55,120,180,200,210,205,165,155,105,85,25,140,75) @ $88 from Altop",
+    "Bought 115mwh HE11-13 (15,50,50) @ $28 from Pacificorp"
   ]
 }
