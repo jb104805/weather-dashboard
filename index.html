@@ -529,7 +529,8 @@ function buildTempTable(tabType) {
   const month = new Date(D.today + 'T12:00:00').getMonth();
   let rowIdx = 0;
 
-  // ── Palo Verde HLH / LLH price rows ──
+  // ── Natural gas + Palo Verde price rows ──
+  buildGasRow(tbody);
   const prices = D.prices || {};
   [['hlh', 'PV HLH $/MWh'], ['llh', 'PV LLH $/MWh']].forEach(([type, label], ri) => {
     const tr = tbody.insertRow();
@@ -786,7 +787,8 @@ function buildUampsTempTable(tabType) {
   const month = new Date(D.today + 'T12:00:00').getMonth();
   let rowIdx = 0;
 
-  // ── Palo Verde HLH / LLH price rows ──
+  // ── Natural gas + Palo Verde price rows ──
+  buildGasRow(tbody);
   const prices = D.prices || {};
   [['hlh', 'PV HLH $/MWh'], ['llh', 'PV LLH $/MWh']].forEach(([type, label], ri) => {
     const tr = tbody.insertRow();
@@ -965,6 +967,30 @@ function positionTooltip(e) {
 
 function hideTradeTooltip() {
   document.getElementById('trade-tooltip').style.display = 'none';
+}
+
+function buildGasRow(tbody) {
+  const gas = D.gas || {};
+  const tr = tbody.insertRow();
+  tr.className = 'frozen-row frozen-row-0';
+  const nameTd = tr.insertCell();
+  nameTd.className = 'city-cell';
+  nameTd.style.cssText = 'font-size:10px;font-weight:bold;color:#1A5276;background:#EAF2F8;';
+  nameTd.textContent = 'Kern River';
+  D.dates.forEach(ds => {
+    const td = tr.insertCell();
+    td.style.cssText = 'text-align:center;font-size:11px;color:#1A5276;background:#EAF2F8;';
+    if (ds <= D.today) {
+      const val = gas[ds];
+      td.textContent = val != null ? '$' + val.toFixed(2) : '';
+    }
+  });
+  const divTd = tr.insertCell();
+  divTd.style.cssText = 'background:#BDC3C7;padding:0;';
+  for (let i = 0; i < 3; i++) {
+    const nd = tr.insertCell();
+    nd.style.background = '#EAF2F8';
+  }
 }
 
 function buildTradesRow(tbody) {
@@ -1194,10 +1220,11 @@ function switchTab(tabType) {
 // ═══════════════════════════════════════════════════
 async function init() {
   try {
-    const [dataRes, pricesRes, tradesRes] = await Promise.all([
+    const [dataRes, pricesRes, tradesRes, gasRes] = await Promise.all([
       fetch('data.json'),
       fetch('prices.json').catch(() => null),
       fetch('trades.json').catch(() => null),
+      fetch('gas.json').catch(() => null),
     ]);
     const raw = await dataRes.json();
 
@@ -1211,6 +1238,7 @@ async function init() {
     D = raw;
     D.prices = pricesRes ? await pricesRes.json().catch(() => ({})) : {};
     D.trades = tradesRes ? await tradesRes.json().catch(() => ({})) : {};
+    D.gas    = gasRes    ? await gasRes.json().catch(()    => ({})) : {};
 
     document.getElementById('loading').style.display = 'none';
     document.getElementById('last-refreshed').textContent = 'Last refreshed: ' + D.last_refreshed;
