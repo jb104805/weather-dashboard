@@ -1,11 +1,4 @@
 {
-  "2026-06-22": [
-    "Bought 1,542mwh shape Sun HE3,12-1 (5,10,45,25,85,106,146,170,182,195,146,172,130,80,45) @ $51 from Altop",
-    "Bought 1,622mwh shape Mon HE12-1 (22,60,52,106,116,155,175,195,200,135,146,90,120,50) @ $51 from Altop"
-  ],
-  "2026-06-23": [
-    "Bought 1342mwh shape H13-1 (35,80,125,105,150,155,135,155,90,105,52,100,55) @ $56 from UMPA"
-  ],
   "2026-06-24": [
     "Bought 416mwh shape H9-14 (5,20,45,105,136,105) @ $22 from PAC",
     "Bought 1286mwh shape H2,15-1 (20,170,172,174,170,140,130,60,85,40,85,40) @ $57 from UMPA"
@@ -78,5 +71,21 @@
   "2026-07-11": [
     "Bought 299 MWH Fri & Sat HE 11-12 (62, 100 | 37,100) @28",
     "Bought 3350 MWH Fri HE 13-24 & Sat HE 1-2, 13-24(20,90,135,105,115,105,105,70,50,0,105,35 |"
+  ],
+  "2026-07-12": [
+    "Bought Sat & Sun HE11-12 50 MWH @$32 from PACICORP",
+    "Bought 305 MWH shape MWH Sun, 345 MWH shape Mon @$55 EDF",
+    "Bought 200 MWH HE 15-22 Sat & Mon @82 from MEA",
+    "Bought 296 MWH shape Sun only @45 from Dynasty",
+    "Bought 50 MWH Sun (HE12-24) & Mon (HE1-7, 10-24) @$38.5 from TEA",
+    "Bought at 95 MHW shape Sun, 948 MWH shape Mon @$85 from Altop"
+  ],
+  "2026-07-13": [
+    "Bought Sat & Sun HE11-12 50 MWH @$32 from PACICORP",
+    "Bought 305 MWH shape MWH Sun, 345 MWH shape Mon @$55 EDF",
+    "Bought 200 MWH HE 15-22 Sat & Mon @82 from MEA",
+    "Bought 296 MWH shape Sun only @45 from Dynasty",
+    "Bought 50 MWH Sun (HE12-24) & Mon (HE1-7, 10-24) @$38.5 from TEA",
+    "Bought at 95 MHW shape Sun, 948 MWH shape Mon @$85 from Altop"
   ]
 }
