@@ -543,10 +543,8 @@ function buildTempTable(tabType) {
     D.dates.forEach(ds => {
       const td = tr.insertCell();
       td.style.cssText = 'text-align:center;font-size:11px;color:#6E2F00;background:#FEF9E7;';
-      if (ds <= D.today) {
-        const val = (prices[ds] || {})[type];
-        td.textContent = val != null ? '$' + val.toFixed(2) : '';
-      }
+      const val = (prices[ds] || {})[type];
+      td.textContent = val != null ? '$' + val.toFixed(2) : '';
     });
 
     const divTd = tr.insertCell();
@@ -801,10 +799,8 @@ function buildUampsTempTable(tabType) {
     D.dates.forEach(ds => {
       const td = tr.insertCell();
       td.style.cssText = 'text-align:center;font-size:11px;color:#6E2F00;background:#FEF9E7;';
-      if (ds <= D.today) {
-        const val = (prices[ds] || {})[type];
-        td.textContent = val != null ? '$' + val.toFixed(2) : '';
-      }
+      const val = (prices[ds] || {})[type];
+      td.textContent = val != null ? '$' + val.toFixed(2) : '';
     });
 
     const divTd = tr.insertCell();
@@ -980,10 +976,8 @@ function buildGasRow(tbody) {
   D.dates.forEach(ds => {
     const td = tr.insertCell();
     td.style.cssText = 'text-align:center;font-size:11px;color:#1A5276;background:#EAF2F8;';
-    if (ds <= D.today) {
-      const val = gas[ds];
-      td.textContent = val != null ? '$' + val.toFixed(2) : '';
-    }
+    const val = gas[ds];
+    td.textContent = val != null ? '$' + val.toFixed(2) : '';
   });
   const divTd = tr.insertCell();
   divTd.style.cssText = 'background:#BDC3C7;padding:0;';
@@ -1006,7 +1000,7 @@ function buildTradesRow(tbody) {
     const td = tr.insertCell();
     td.dataset.date = ds;
     const dayTrades = trades[ds] || [];
-    if (ds <= D.today && dayTrades.length) {
+    if (dayTrades.length) {
       td.style.cssText = 'background:#EBF5FB;cursor:default;';
       td.addEventListener('mouseover', e => showTradeTooltip(e, ds, dayTrades));
       td.addEventListener('mousemove', positionTooltip);
