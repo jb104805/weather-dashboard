@@ -1,11 +1,4 @@
 {
-  "2026-06-29": [
-    "No purchases or sales"
-  ],
-  "2026-06-30": [
-    "Bought 190mwh shape H13-17 (25,5,35,55,70) @ $22 from PAC",
-    "Bought 405mwh shape H18-24 (62,65,74,55,82,42,25) @ $50 from UMPA"
-  ],
   "2026-07-01": [
     "Bought 60mw HE24, 22mw HE1 @ $23 from Pacificorp",
     "Bought 20mw HE18-20 Wed only @ $55 from UMPA"
@@ -95,5 +88,13 @@
     "Bought 35mwh Sat H12-13 (5,30) @ $26 from Pacificorp",
     "Bought 1331mwh shape Fri H2,13-1 (5,120,108,135,148,155,135,115,110,55,65,10,115,55) @ $72 from Altop",
     "Bought 698mwh shape Sat H14-1 (30,56,80,72,76,65,85,35,44,0,105,50) @ $72 from Altop"
+  ],
+  "2026-07-19": [
+    "Bought 2730mwh shape Sun H2,11-1 (20,45,105,155,155,202,230,225,255,275,266,235,245,182,100,35) @ $86.50 from Mercuria",
+    "Bought 1556mwh shape Mon H2-6,11-1 (35,25,25,20,5,5,30,65,62,85,126,148,152,152,138,142,82,82,20,120,72) @ $86.50 from Mercuria"
+  ],
+  "2026-07-20": [
+    "Bought 2730mwh shape Sun H2,11-1 (20,45,105,155,155,202,230,225,255,275,266,235,245,182,100,35) @ $86.50 from Mercuria",
+    "Bought 1556mwh shape Mon H2-6,11-1 (35,25,25,20,5,5,30,65,62,85,126,148,152,152,138,142,82,82,20,120,72) @ $86.50 from Mercuria"
   ]
 }
