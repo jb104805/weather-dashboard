@@ -1,8 +1,4 @@
 {
-  "2026-07-02": [
-    "Bought 60mw HE24, 22mw HE1 @ $23 from Pacificorp",
-    "Bought 20mw HE18-20 Wed only @ $55 from UMPA"
-  ],
   "2026-07-03": [
     "Bought 720mwh Sat HE8-13 (30,55,115,120,190,210) @ $22 from Pacificorp",
     "Bought 2460mwh Sat HE2,14-1 (25,180,200,210,225,250,235,270,240,255,190,110,70) @ $60 from UMPA"
@@ -96,5 +92,8 @@
   "2026-07-21": [
     "Bought 180mwh HE17-19,24 (100,50,20,10) @ $90 from UMPA",
     "Bought 135mwh HE15-16 (60,75) @ $38 from Pacificorp"
+  ],
+  "2026-07-22": [
+    "Bought 145mwh HE15-18,24 (25,35,50,15,20) @ $85 from UMPA"
   ]
 }
