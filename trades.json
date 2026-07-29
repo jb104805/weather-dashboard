@@ -1,22 +1,4 @@
 {
-  "2026-07-08": [
-    "Bought 120 MWH HE 16-24 PPT (5,10,20,20,15,15,0,10,25) @67 from Altop",
-    "Bought 720 MWH HE 14-24 PPT (70,100,125,110,95,75,25,10,30,75,5) @67 from UMPA",
-    "Bought 65 MWH HE 12-13 PPT (50,15) @25 from PACICORP"
-  ],
-  "2026-07-09": [
-    "Bought 120 MWH HE 23-24 PPT (10,20) @34.5 from EDF",
-    "Bought 625 MWH HE 15-24 PPT (65,95,100,95,80,35,45,0,90,20) @67 from UMPA",
-    "Bought 65 MWH HE 12-14 PPT (50,15,57) @26 from PACICORP"
-  ],
-  "2026-07-10": [
-    "Bought 299 MWH Fri & Sat HE 11-12 (62, 100 | 37,100) @28",
-    "Bought 3350 MWH Fri HE 13-24 & Sat HE 1-2, 13-24(20,90,135,105,115,105,105,70,50,0,105,35 |"
-  ],
-  "2026-07-11": [
-    "Bought 299 MWH Fri & Sat HE 11-12 (62, 100 | 37,100) @28",
-    "Bought 3350 MWH Fri HE 13-24 & Sat HE 1-2, 13-24(20,90,135,105,115,105,105,70,50,0,105,35 |"
-  ],
   "2026-07-12": [
     "Bought Sat & Sun HE11-12 50 MWH @$32 from PACICORP",
     "Bought 305 MWH shape MWH Sun, 345 MWH shape Mon @$55 EDF",
@@ -89,5 +71,20 @@
   "2026-07-27": [
     "Bought a shape from UMPA @$110 7/26 HE11-24 (45,70,65,115,145,160,165,140,145,100,110,60,5,0)",
     "Bought a shape from UMPA @$110 7/27 HE11-24 (40,50,35,100,100,110,75,40,30,0,0,0,40,10)"
+  ],
+  "2026-07-28": [
+    "Bought 280mwh HE13-24 (10,10,55,70,70,30,10,0,0,0,0,25) @ $110 from UMPA",
+    "Bought 65mwh HE10-11 (10,55) @ $46 from Pacificorp"
+  ],
+  "2026-07-29": [
+    "Bought 20mw HE17 @ $92 from Altop"
+  ],
+  "2026-07-30": [
+    "Bought 15mw HE16 from Altop",
+    "Bought 20mw HE17 Thurs only @ $92 from Altop"
+  ],
+  "2026-07-31": [
+    "Bought 15mw HE16 from Altop",
+    "Bought 20mw HE17 Thurs only @ $92 from Altop"
   ]
 }
