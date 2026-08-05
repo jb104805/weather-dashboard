@@ -1,10 +1,4 @@
 {
-  "2026-07-17": [
-    "Bought 205mwh Fri H9-12 (5,25,70,105) from Pacificorp",
-    "Bought 35mwh Sat H12-13 (5,30) @ $26 from Pacificorp",
-    "Bought 1331mwh shape Fri H2,13-1 (5,120,108,135,148,155,135,115,110,55,65,10,115,55) @ $72 from Altop",
-    "Bought 698mwh shape Sat H14-1 (30,56,80,72,76,65,85,35,44,0,105,50) @ $72 from Altop"
-  ],
   "2026-07-18": [
     "Bought 205mwh Fri H9-12 (5,25,70,105) from Pacificorp",
     "Bought 35mwh Sat H12-13 (5,30) @ $26 from Pacificorp",
@@ -73,6 +67,9 @@
     "Bought 175mwh HE16-20 (50,70,30,0,25) @ $89 from Altop"
   ],
   "2026-08-05": [
+    "Bought 20mw HE17 @ $85 from UMPA"
+  ],
+  "2026-08-06": [
     "Bought 20mw HE17 @ $85 from UMPA"
   ]
 }
