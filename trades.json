@@ -1,7 +1,4 @@
 {
-  "2026-08-06": [
-    "Bought 20mw HE17 @ $85 from UMPA"
-  ],
   "2026-08-07": [
     "Bought 312mwh Fri HE14-20 (15,62,66,72,30,22,45) @ $76 from Altop",
     "Bought 260mwh Sat HE14-20 (10,25,25,65,45,50,40) @ $76 from Altop"
@@ -72,5 +69,8 @@
   "2026-08-25": [
     "Bought 170mwh HE15-HE20 (5,15,42,32,44,32) @ $130 from Altop",
     "Bought 345mwh HE13-HE20 (15,30,50,60,60,60,60,10) @ $130 from Dynasty"
+  ],
+  "2026-08-26": [
+    "Bought 352mwh HE14-HE24 (10,40,75,85,60,40,32,0,0,0,10) @ $150 from Dynasty"
   ]
 }
