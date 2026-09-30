@@ -1,9 +1,4 @@
 {
-  "2026-09-10": [
-    "Bought 740mwh shape from PAC H10-23 @ $70 (15,0,0,40,70,75,75,75,75,75,75,55,55,55)",
-    "Bought 10mw from Altop H15-18 @ $105",
-    "Bought 385mwh shape from UMPA H15-1 @ $125 (25,45,40,65,70,40,0,0,0,70,30)"
-  ],
   "2026-09-11": [
     "Bought 30HL from UMPA @ $52",
     "Bought 290mwh Fri/Sat (HE2,3,24,1: 25,10,70,45;30,5,45,60) from UMPA @ $49",
@@ -85,5 +80,9 @@
   "2026-09-30": [
     "Bought 490mwh shape from PAC H9-18 @ $29 (50,35,30,35,50,45,60,60,80,45)",
     "Bought 160mwh shape from UMPA H7-8,H19-1 @ $50 (15,5,65,30,5,0,0,20,20)"
+  ],
+  "2026-10-01": [
+    "Bought345mwh shape from PAC H9-16 @ $27 (20,0,0,35,45,65,75,105)",
+    "Bought 709mwh shape from UMPA H7-9,H18-1 @ $50 (30,45,45,130,140,120,80,40,45,14,20)"
   ]
 }
