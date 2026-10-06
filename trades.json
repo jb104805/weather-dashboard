@@ -1,9 +1,4 @@
 {
-  "2026-09-16": [
-    "Bought 25HL @ $45 from Idaho Power",
-    "Bought 1125mwh shape from PAC H9-23 @ $54 (60,75,75,35,75,100,100,100,100,100,100,90,35,45,35)",
-    "Bought 275mwh shape from UMPA H6,7,14-19,24,1 @ $49 (10,50,5,5,15,45,35,20,40,50)"
-  ],
   "2026-09-17": [
     "Bought 1265mwh shape from PAC H8-23 @ $52 (10,45,70,85,90,80,105,120,120,120,120,115,70,25,45,45)",
     "Bought 175mwh shape from UMPA H7,16-18,24,1 @ $40 (35,15,30,20,35,40)"
@@ -90,5 +85,9 @@
   "2026-10-06": [
     "Bought 785mwh shape from PAC H10-17 @ $37.50 (100,85,100,100,100,100,100,100)",
     "Bought 2135mwh shape from UMPA H2-1 @ $80LL/$130HL"
+  ],
+  "2026-10-07": [
+    "Bought 710mwh shape from PAC H9-17 @ $36 (70,70,20,55,40,80,125,125,125)",
+    "Bought 1500mwh shape from UMPA H2-3, H7-8,H15-1 @ $65LL/$105HL"
   ]
 }
