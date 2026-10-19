@@ -1,17 +1,4 @@
 {
-  "2026-09-28": [
-    "Bought 2355mwh Sun H7-1(15,35,90,125,150,135,170,225,225,220,240,240,155,90,60,60,85,10,25) from Pacificorp @ $38",
-    "Bought 1095mwh Mon H7-18(80,55,125,145,130,95,90,75,75,75,85,65) from Pacificorp @ $38"
-  ],
-  "2026-09-29": [
-    "Bought 335mwh shape from PAC H11-15 @ $27 (55,55,60,80,85)",
-    "Bought 555mwh shape from UMPA H7-10,H16-1 @ $50 (65,60,80,75,90,100,65,5,0,0,10,0,0,5)",
-    "Bought 30HL from UMPA @ $60"
-  ],
-  "2026-09-30": [
-    "Bought 490mwh shape from PAC H9-18 @ $29 (50,35,30,35,50,45,60,60,80,45)",
-    "Bought 160mwh shape from UMPA H7-8,H19-1 @ $50 (15,5,65,30,5,0,0,20,20)"
-  ],
   "2026-10-01": [
     "Bought345mwh shape from PAC H9-16 @ $27 (20,0,0,35,45,65,75,105)",
     "Bought 709mwh shape from UMPA H7-9,H18-1 @ $50 (30,45,45,130,140,120,80,40,45,14,20)"
@@ -84,6 +71,12 @@
     "Bought 135 MWH shape from PAC @38",
     "Bought 180 MWH shape from UMPA @ $50"
   ],
+  "2026-10-16": [
+    "Bought from UMPA a 115 MWH Shape @ 50 Friday only"
+  ],
+  "2026-10-17": [
+    "Bought from UMPA a 115 MWH Shape @ 50 Friday only"
+  ],
   "2026-10-18": [
     "Bought from PAC a 310 MWH Shape @40 Sun",
     "Bought from PAC a 285 MWH Shape @40 Sun"
@@ -91,5 +84,8 @@
   "2026-10-19": [
     "Bought from PAC a 310 MWH Shape @40 Sun",
     "Bought from PAC a 285 MWH Shape @40 Sun"
+  ],
+  "2026-10-20": [
+    "Bought 790mwh HE6-10,15-1 (10,30,30,35,55,20,60,60,95,95,65,70,55,60,20,30) @ $58 from UMPA"
   ]
 }
